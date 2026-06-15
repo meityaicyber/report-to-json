@@ -1,8 +1,23 @@
+# Core document processing
 python-docx>=1.1.0
 pdfplumber>=0.10.0
 pypdf>=4.0.0
 pymupdf>=1.24.0
+
+# Schema validation
 jsonschema>=4.21.0
+
+# HTTP / CLI / Config
 requests>=2.31.0
 click>=8.1.0
 python-dotenv>=1.0.0
+
+# VLM dependencies (Qwen2.5-VL-7B-Instruct)
+torch>=2.1.0
+torchvision>=0.16.0
+transformers>=4.45.0
+accelerate>=0.25.0
+bitsandbytes>=0.41.0
+qwen-vl-utils>=0.0.2
+Pillow>=10.0.0
+tqdm>=4.66.0

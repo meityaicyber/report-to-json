@@ -1,21 +1,33 @@
-The Document Standardization Pipeline is an automated system designed to convert complex, unstructured documents—specifically PDFs and Word documents—into cleanly structured, machine-readable data formats. 
+The Document Standardization Pipeline is an automated system designed to convert complex, unstructured documents—specifically PDFs and Word documents—into cleanly structured, machine-readable JSON.
 
 At its core, the pipeline acts as an intelligent reader. It examines a document, understands its layout and contents, and organizes that information into a strict taxonomy, ensuring that the final output is highly consistent and predictable.
 
-Currently, the pipeline defaults to a Vision-First approach. Rather than trying to parse a document purely by extracting its raw textual characters, the pipeline "looks" at the document visually, much like a human would. 
+The pipeline uses a Vision-First approach with a two-pass architecture. The first pass, described here, focuses on ensuring that ALL information from the source document is captured in the JSON output with correct hierarchical structure.
 
-This is achieved using advanced Vision-Language Artificial Intelligence. By analyzing the visual layout, the AI can seamlessly understand complex relationships such as which text blocks belong to which headings, how multi-column layouts flow, and the precise structure of data tables.
+## First Pass — Parallel Route Architecture
 
-The system processes documents in a highly orchestrated, multi-step sequence.
+The first pass operates through two parallel routes that converge in a merge step.
 
-First, visual decoupling occurs. Documents frequently contain embedded images, diagrams, and complex charts that disrupt the flow of text. Before reading the document as a whole, the pipeline sweeps through the pages and extracts these visual elements. 
+### Route 1: Table & Image Pre-Extraction
 
-Instead of forcing the main AI to read text and interpret complex diagrams simultaneously, the pipeline batches these diagrams and sends them to a dedicated visual analysis process. This process carefully studies each diagram and generates a detailed text description of what it represents, ensuring high throughput.
+Before the main VLM reads the document, the pipeline sweeps through the PDF and pre-extracts two categories of content that are problematic for Vision-Language Models:
 
-Once the diagrams have been accounted for, the pipeline presents the full visual page to the AI, alongside explicitly extracted table structures to guarantee alignment. 
+**Tables:** Tables that span multiple pages are frequently misread by VLMs because each page is processed independently. The pipeline uses pdfplumber to geometrically detect table bounding boxes on every page. When a table on page N+1 has the same column count as the last table on page N, the pipeline recognizes this as a continuation and stitches the cropped table images vertically into a single tall image. Each stitched table is then sent to the VLM for structured JSON extraction, producing accurate tabular data regardless of how many pages it spans.
 
-The AI reads the page and begins structuring the information into a strict data format. When it encounters a diagram, it does not stop to analyze it; instead, it leaves a placeholder indicating exactly where the visual element belongs in the flow of the document.
+**Images:** Embedded images, diagrams, and charts are computationally expensive for VLMs and disrupt text comprehension. The pipeline extracts these images and saves them to deep storage on disk. Their positions are recorded but their content is not analyzed during the first pass.
 
-After the AI has finished structuring the page, the pipeline performs a final cleanup pass. It matches the placeholders left by the AI with the detailed descriptions generated during the pre-processing phase. The placeholders are cleanly swapped out for the rich text descriptions.
+After extraction, the pipeline renders "cleaned" page images. In these cleaned images, every table region and image region has been whited out and replaced with a visible placeholder label — for example, `[TABLE_PLACEHOLDER_1]` or `[IMAGE_PAGE_3_FIG_2]`. These placeholders are clearly legible in the rendered image so the main VLM can see and preserve them.
 
-By separating the complex task of diagram interpretation from the broader task of layout comprehension, the pipeline operates with high efficiency and accuracy. The end result is a perfectly structured data file that preserves not just the text, but the structural layout and the contextual meaning of all visual elements within the original document.
+### Route 2: VLM Page Extraction
+
+The cleaned page images are fed one-by-one into the Vision-Language Model (Qwen2.5-VL-7B-Instruct). The VLM reads the visual layout of each page — headings, paragraphs, lists, structure — and produces a hierarchical JSON representation. When it encounters a placeholder string, it outputs that string verbatim into the JSON, marking exactly where the table or image belongs in the document structure.
+
+### Merge Step
+
+After both routes complete, the pipeline walks the VLM's JSON output and finds every `[TABLE_PLACEHOLDER_N]` string. Each is replaced with the corresponding structured table JSON that was parsed during Route 1. Image placeholders remain as-is for now — they point to the files saved in deep storage and can be resolved in a future pass.
+
+The end result is a single, complete JSON file that preserves all textual content, all tabular data (even multi-page tables), and the structural hierarchy of the original document.
+
+## Shared Model Architecture
+
+A single instance of the Qwen2.5-VL-7B-Instruct model is loaded once in 8-bit precision and shared across all three VLM-dependent components (table parser, page extractor, and image describer). This keeps VRAM usage to approximately 9-10GB on a 16GB GPU, with room for KV cache during inference. The GPU work is serialized — Route 1 table parsing runs first, then Route 2 page extraction — but the logical architecture remains parallel in design.

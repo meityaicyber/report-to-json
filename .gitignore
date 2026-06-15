@@ -20,3 +20,8 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints
+
+# Outputs
+output*/
+output*.json
+output*.md
