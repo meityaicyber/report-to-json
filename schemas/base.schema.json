@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["_meta", "sections"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["pipeline_version", "source_file", "document_type", "extraction_timestamp"],
+      "properties": {
+        "pipeline_version": { "type": "string" },
+        "source_file": { "type": "string" },
+        "document_type": { "type": ["string", "null"] },
+        "extraction_timestamp": { "type": "string", "format": "date-time" },
+        "image_placeholder_count": { "type": "integer" },
+        "llm_model": { "type": "string" },
+        "inferred_schema_version": { "type": "string" },
+        "raw_text_fallback": { "type": ["string", "null"] },
+        "_extraction_status": { "type": ["string", "null"] }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "description": "Top-level sections as identified by the LLM. Keys are section names (snake_case). Values are section content objects whose structure is defined by the inferred schema.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
