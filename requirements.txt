@@ -21,3 +21,7 @@ bitsandbytes>=0.41.0
 qwen-vl-utils>=0.0.2
 Pillow>=10.0.0
 tqdm>=4.66.0
+
+# Security dependencies
+yara-python>=3.11.0
+python-magic>=0.4.27
