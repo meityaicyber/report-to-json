@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sentinel AI - Document Processing Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#2d3133",
+                "surface-container-highest": "#e0e3e5",
+                "inverse-primary": "#bec6e0",
+                "on-tertiary": "#ffffff",
+                "surface-container-low": "#f2f4f6",
+                "on-surface": "#191c1e",
+                "surface": "#f7f9fb",
+                "tertiary-container": "#002113",
+                "primary-fixed-dim": "#bec6e0",
+                "on-tertiary-fixed-variant": "#005236",
+                "on-primary-fixed-variant": "#3f465c",
+                "tertiary": "#000000",
+                "primary-container": "#131b2e",
+                "surface-container-lowest": "#ffffff",
+                "outline": "#76777d",
+                "outline-variant": "#c6c6cd",
+                "on-error-container": "#93000a",
+                "on-primary-fixed": "#131b2e",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#009668",
+                "surface-container": "#eceef0",
+                "secondary": "#4648d4",
+                "tertiary-fixed-dim": "#4edea3",
+                "error-container": "#ffdad6",
+                "inverse-on-surface": "#eff1f3",
+                "background": "#f7f9fb",
+                "surface-dim": "#d8dadc",
+                "secondary-fixed-dim": "#c0c1ff",
+                "on-primary-container": "#7c839b",
+                "secondary-fixed": "#e1e0ff",
+                "on-surface-variant": "#45464d",
+                "on-primary": "#ffffff",
+                "error": "#ba1a1a",
+                "primary-fixed": "#dae2fd",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#fffbff",
+                "primary": "#000000",
+                "tertiary-fixed": "#6ffbbe",
+                "on-background": "#191c1e",
+                "on-secondary-fixed-variant": "#2f2ebe",
+                "surface-tint": "#565e74",
+                "surface-variant": "#e0e3e5",
+                "surface-container-high": "#e6e8ea",
+                "secondary-container": "#6063ee",
+                "surface-bright": "#f7f9fb",
+                "on-tertiary-fixed": "#002113",
+                "on-secondary-fixed": "#07006c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "sm": "12px",
+                "xl": "32px",
+                "md": "16px",
+                "base": "4px",
+                "container-max": "1440px",
+                "lg": "24px",
+                "gutter": "20px",
+                "xs": "8px"
+            },
+            "fontFamily": {
+                "display-lg": ["Inter"],
+                "data-mono": ["JetBrains Mono"],
+                "body-sm": ["Inter"],
+                "headline-md": ["Inter"],
+                "body-base": ["Inter"],
+                "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base antialiased">
+    <!-- TopNavBar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant h-16 flex items-center justify-between px-xl max-w-container-max mx-auto">
+        <div class="flex items-center gap-xl">
+            <span class="font-display-lg text-display-lg font-bold text-primary">Sentinel AI</span>
+            <div class="hidden md:flex items-center gap-lg">
+                <span class="text-secondary border-b-2 border-secondary pb-1 font-body-base cursor-pointer">Dashboard</span>
+                <span class="text-on-surface-variant font-body-base cursor-pointer hover:bg-surface-container-low transition-colors px-2 rounded">Projects</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-md">
+            <div class="relative hidden sm:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-secondary/20 transition-all font-body-sm" placeholder="Search pipelines..." type="text"/>
+            </div>
+            <div class="flex items-center gap-sm">
+                <button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+                </button>
+                <button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-on-surface-variant">settings</span>
+                </button>
+                <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwHqUlQC6ieqmz_Oca1-TkJteRZFZSTOHcrBE7jjgl925lEpNhY-d4D6Cfe-78G_3djdwnXRkwjSxa3DatMHz1viT7QGaRl1amCWOnpAwPPaeAnac_n0yGlsX5Mc3oJa-NAp0NBSUMLVzuIztnsbThG-R6Ug2huvUyvw1r0kwPBvrI1dL-4JnHkYwGBGEIogMHnzz5vWx7id3hCjiu3DSQim2h3wHE6sneLDdwex4aNZE4kDrHzyvhWrEq649dxYC6sk75PHUfszA"/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-16 bottom-0 w-[240px] bg-surface border-r border-outline-variant flex flex-col p-md z-40 hidden md:flex">
+        <div class="mb-lg px-2">
+            <p class="text-headline-md font-headline-md text-primary">Navigation</p>
+            <p class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest">Pipeline Control</p>
+        </div>
+        <nav class="flex-1 space-y-2">
+            <a class="flex items-center gap-md px-3 py-2 text-secondary bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer" id="nav-dashboard" onclick="switchView('dashboard')">
+                <span class="material-symbols-outlined">analytics</span>
+                <span class="text-label-caps font-label-caps">Reports</span>
+            </a>
+            <a class="flex items-center gap-md px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer" id="nav-history" onclick="switchView('history')">
+                <span class="material-symbols-outlined">history</span>
+                <span class="text-label-caps font-label-caps">History</span>
+            </a>
+            <a class="flex items-center gap-md px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer" id="nav-status" onclick="switchView('status')">
+                <span class="material-symbols-outlined">dns</span>
+                <span class="text-label-caps font-label-caps">System Status</span>
+            </a>
+        </nav>
+        <div class="mt-auto p-4 bg-surface-container-low rounded-xl border border-outline-variant">
+            <div class="flex items-center gap-sm mb-2">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="engine-heartbeat"></div>
+                <span class="text-label-caps font-label-caps text-on-surface" id="engine-status-text">Engine Ready</span>
+            </div>
+            <p class="text-body-sm font-body-sm text-on-surface-variant">Local Host: 127.0.0.1</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="md:ml-[240px] pt-16 pb-20 px-xl min-h-screen">
+        <div class="max-w-6xl mx-auto py-xl">
+            
+            <!-- Dashboard View Pane -->
+            <div id="view-dashboard" class="view-pane">
+                <!-- Section 1: Security Gate & Upload -->
+                <section class="mb-xl">
+                    <div class="grid grid-cols-1 gap-lg">
+                        <div id="upload-zone" class="bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center text-center hover:border-secondary transition-colors cursor-pointer group">
+                            <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,.docm"/>
+                            <div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center mb-md group-hover:bg-secondary/10 transition-colors">
+                                <span class="material-symbols-outlined text-display-lg text-on-surface-variant group-hover:text-secondary" id="upload-icon">cloud_upload</span>
+                            </div>
+                            <h3 class="text-headline-md font-headline-md mb-xs" id="upload-title">Upload Document for Processing</h3>
+                            <p class="text-body-sm font-body-sm text-on-surface-variant mb-md" id="upload-subtitle">Drag and drop PDF, DOCX, or DOCM files</p>
+                            
+                            <button class="bg-secondary text-white px-lg py-sm rounded-lg font-body-base hover:opacity-90 transition-all">Select File</button>
+                        </div>
+
+                        <!-- Status Banner (Hidden by default, shown dynamically) -->
+                        <div id="status-banner-container" class="hidden"></div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Pipeline Progress (Hidden by default, shown during execution) -->
+                <section id="progress-section" class="mb-xl bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hidden">
+                    <h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-lg">Processing Pipeline</h3>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-gutter">
+                        
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center text-center flex-1" id="step-security">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center mb-2 z-10">
+                                <span class="material-symbols-outlined">shield</span>
+                            </div>
+                            <p class="text-label-caps font-label-caps text-on-surface-variant">Security Gate</p>
+                        </div>
+                        <div class="hidden md:block h-0.5 flex-1 bg-surface-container-high -mt-10 transition-colors duration-500" id="line-1"></div>
+                        
+                        <!-- Step 2 -->
+                        <div class="flex flex-col items-center text-center flex-1" id="step-tables">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center mb-2 z-10">
+                                <span class="material-symbols-outlined">table_chart</span>
+                            </div>
+                            <p class="text-label-caps font-label-caps text-on-surface-variant">Table Extraction</p>
+                        </div>
+                        <div class="hidden md:block h-0.5 flex-1 bg-surface-container-high -mt-10 transition-colors duration-500" id="line-2"></div>
+                        
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center text-center flex-1" id="step-cleaning">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center mb-2 z-10">
+                                <span class="material-symbols-outlined">cleaning_services</span>
+                            </div>
+                            <p class="text-label-caps font-label-caps text-on-surface-variant">Page Cleaning</p>
+                        </div>
+                        <div class="hidden md:block h-0.5 flex-1 bg-surface-container-high -mt-10 transition-colors duration-500" id="line-3"></div>
+                        
+                        <!-- Step 4 -->
+                        <div class="flex flex-col items-center text-center flex-1" id="step-vlm">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center mb-2 z-10">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </div>
+                            <p class="text-label-caps font-label-caps text-on-surface-variant">VLM Analysis</p>
+                        </div>
+                        <div class="hidden md:block h-0.5 flex-1 bg-surface-container-high -mt-10 transition-colors duration-500" id="line-4"></div>
+                        
+                        <!-- Step 5 -->
+                        <div class="flex flex-col items-center text-center flex-1" id="step-llm">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center mb-2 z-10">
+                                <span class="material-symbols-outlined">account_tree</span>
+                            </div>
+                            <p class="text-label-caps font-label-caps text-on-surface-variant">LLM Structuring</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Console Log Output Section (Hidden by default, shown during execution) -->
+                <section id="console-section" class="mb-xl bg-inverse-surface border border-outline rounded-xl overflow-hidden shadow-sm hidden">
+                    <div class="bg-[#1f2224] border-b border-outline px-lg py-sm flex justify-between items-center text-[#c0c1ff]">
+                        <span class="text-label-caps font-label-caps uppercase tracking-wider">Pipeline Output Log</span>
+                        <div class="w-2.5 h-2.5 rounded-full bg-[#ffb4ab] animate-ping" id="console-dot"></div>
+                    </div>
+                    <div class="p-lg overflow-y-auto max-h-[250px] hide-scrollbar font-data-mono text-data-mono text-secondary-fixed text-xs space-y-1" id="console-logs">
+                        <!-- Logs dynamically appended here -->
+                    </div>
+                </section>
+
+                <!-- Section 3: Results Dashboard (Tabs) (Hidden by default, shown when complete) -->
+                <section id="results-section" class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hidden">
+                    <div class="border-b border-outline-variant bg-surface">
+                        <nav class="flex gap-lg px-lg">
+                            <button class="py-4 text-secondary border-b-2 border-secondary font-headline-md text-headline-md transition-all" id="tab-overview" onclick="switchTab('overview')">Overview</button>
+                            <button class="py-4 text-on-surface-variant font-headline-md text-headline-md hover:text-primary transition-all" id="tab-findings" onclick="switchTab('findings')">Findings</button>
+                            <button class="py-4 text-on-surface-variant font-headline-md text-headline-md hover:text-primary transition-all" id="tab-inspector" onclick="switchTab('inspector')">Asset Inspector</button>
+                            <button class="py-4 text-on-surface-variant font-headline-md text-headline-md hover:text-primary transition-all" id="tab-json" onclick="switchTab('json')">Raw JSON</button>
+                        </nav>
+                    </div>
+                    <div class="p-xl min-h-[400px]">
+                        <!-- Overview Tab Content -->
+                        <div class="tab-pane" id="content-overview">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+                                <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant">
+                                    <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-base">Processing Time</p>
+                                    <p class="text-display-lg font-display-lg text-primary" id="metric-time">--</p>
+                                    <div class="mt-sm flex items-center gap-xs text-emerald-600">
+                                        <span class="material-symbols-outlined text-body-sm">timer</span>
+                                        <span class="text-body-sm">Completed processing</span>
+                                    </div>
+                                </div>
+                                <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant">
+                                    <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-base">Tables Detected</p>
+                                    <p class="text-display-lg font-display-lg text-primary" id="metric-tables">--</p>
+                                    <p class="mt-sm text-body-sm text-on-surface-variant">Stitched and parsed from PDF</p>
+                                </div>
+                                <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant">
+                                    <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-base">Visual Assets</p>
+                                    <p class="text-display-lg font-display-lg text-primary" id="metric-assets">--</p>
+                                    <p class="mt-sm text-body-sm text-on-surface-variant">Includes charts and diagrams</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-lg rounded-xl border border-outline-variant">
+                                <h4 class="text-headline-md font-headline-md mb-md">Executive Summary</h4>
+                                <p class="text-body-base font-body-base text-on-surface-variant leading-relaxed max-w-4xl" id="summary-text">
+                                    No summary available. Run a document through the pipeline to inspect data.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Findings Grid Tab Content -->
+                        <div class="tab-pane hidden" id="content-findings">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md" id="findings-container">
+                                <!-- Dynamically generated findings cards -->
+                            </div>
+                        </div>
+
+                        <!-- Asset Inspector Content -->
+                        <div class="tab-pane hidden" id="content-inspector">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+                                <!-- Image Side -->
+                                <div class="space-y-md">
+                                    <p class="text-label-caps font-label-caps text-on-surface-variant uppercase" id="inspector-image-label">Stitched Table (PNG)</p>
+                                    <div class="aspect-video bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden flex items-center justify-center" id="inspector-image-wrapper">
+                                        <span class="material-symbols-outlined text-display-lg text-outline">image</span>
+                                    </div>
+                                </div>
+                                <!-- JSON Table Side -->
+                                <div class="space-y-md">
+                                    <p class="text-label-caps font-label-caps text-on-surface-variant uppercase" id="inspector-table-label">Parsed JSON Equivalent</p>
+                                    <div class="bg-white border border-outline-variant rounded-xl overflow-x-auto" id="inspector-table-container">
+                                        <!-- Rendered dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Raw JSON Tab Content -->
+                        <div class="tab-pane hidden" id="content-json">
+                            <div class="flex justify-between items-center mb-md">
+                                <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">Output Manifest</p>
+                                <button class="flex items-center gap-xs bg-primary text-white px-md py-xs rounded hover:bg-secondary transition-colors" id="copy-json-btn">
+                                    <span class="material-symbols-outlined text-body-sm">content_copy</span>
+                                    <span class="text-body-sm">Copy JSON</span>
+                                </button>
+                            </div>
+                            <div class="bg-inverse-surface rounded-xl p-lg overflow-x-auto max-h-[400px] hide-scrollbar border border-outline">
+                                <pre class="font-data-mono text-data-mono text-secondary-fixed text-sm" id="json-pre">{}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- History View Pane -->
+            <div id="view-history" class="view-pane hidden">
+                <h2 class="text-display-lg font-display-lg text-primary mb-md">Processing History</h2>
+                <p class="text-body-sm text-on-surface-variant mb-lg">List of past and current standardization tasks processed on this system.</p>
+                
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left font-body-sm">
+                            <thead class="bg-surface-container-low border-b border-outline-variant">
+                                <tr>
+                                    <th class="px-lg py-md font-bold uppercase text-xs">File Name</th>
+                                    <th class="px-lg py-md font-bold uppercase text-xs">Date Scanned</th>
+                                    <th class="px-lg py-md font-bold uppercase text-xs">Verdict</th>
+                                    <th class="px-lg py-md font-bold uppercase text-xs">Status</th>
+                                    <th class="px-lg py-md font-bold uppercase text-xs text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant" id="history-table-body">
+                                <tr>
+                                    <td class="px-lg py-lg text-center text-on-surface-variant" colspan="5">
+                                        Loading historical records...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status View Pane -->
+            <div id="view-status" class="view-pane hidden">
+                <h2 class="text-display-lg font-display-lg text-primary mb-md">System Resource Status</h2>
+                <p class="text-body-sm text-on-surface-variant mb-lg">Real-time status of local hardware resources and machine learning engines.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+                    <!-- CPU Card -->
+                    <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant flex flex-col justify-between min-h-[140px]">
+                        <div>
+                            <span class="material-symbols-outlined text-secondary text-headline-md mb-xs">computer</span>
+                            <h4 class="font-bold text-on-surface">CPU Load</h4>
+                        </div>
+                        <div class="mt-md">
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" id="status-cpu-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="text-body-sm text-on-surface-variant mt-xs inline-block" id="status-cpu-text">Checking...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- RAM Card -->
+                    <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant flex flex-col justify-between min-h-[140px]">
+                        <div>
+                            <span class="material-symbols-outlined text-secondary text-headline-md mb-xs">memory</span>
+                            <h4 class="font-bold text-on-surface">System Memory</h4>
+                        </div>
+                        <div class="mt-md">
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" id="status-ram-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="text-body-sm text-on-surface-variant mt-xs inline-block" id="status-ram-text">Checking...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Disk Card -->
+                    <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant flex flex-col justify-between min-h-[140px]">
+                        <div>
+                            <span class="material-symbols-outlined text-secondary text-headline-md mb-xs">database</span>
+                            <h4 class="font-bold text-on-surface">Free Storage</h4>
+                        </div>
+                        <div class="mt-md">
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" id="status-disk-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="text-body-sm text-on-surface-variant mt-xs inline-block" id="status-disk-text">Checking...</span>
+                        </div>
+                    </div>
+
+                    <!-- GPU Card -->
+                    <div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant flex flex-col justify-between min-h-[140px]">
+                        <div>
+                            <span class="material-symbols-outlined text-secondary text-headline-md mb-xs">hardware</span>
+                            <h4 class="font-bold text-on-surface">GPU VRAM</h4>
+                        </div>
+                        <div class="mt-md">
+                            <span class="text-headline-md font-bold text-primary block" id="status-gpu-state">Checking...</span>
+                            <span class="text-body-sm text-on-surface-variant mt-xs inline-block truncate max-w-full" id="status-gpu-name">Checking...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-lg rounded-xl border border-outline-variant">
+                    <h4 class="text-headline-md font-headline-md mb-md">Engine Diagnostic Checklist</h4>
+                    <div class="divide-y divide-outline-variant font-body-sm text-on-surface-variant">
+                        <div class="py-sm flex justify-between items-center">
+                            <span>YARA Engine (Signature Scan)</span>
+                            <span class="font-bold font-data-mono flex items-center gap-xs" id="diagnostic-yara"><span class="w-2 h-2 bg-outline rounded-full"></span>Loading...</span>
+                        </div>
+                        <div class="py-sm flex justify-between items-center">
+                            <span>ClamAV Daemon (Virus Definition Scan)</span>
+                            <span class="font-bold font-data-mono flex items-center gap-xs" id="diagnostic-clamav"><span class="w-2 h-2 bg-outline rounded-full"></span>Loading...</span>
+                        </div>
+                        <div class="py-sm flex justify-between items-center">
+                            <span>Ghostscript CLI (Active Content Strip)</span>
+                            <span class="font-bold font-data-mono flex items-center gap-xs" id="diagnostic-gs"><span class="w-2 h-2 bg-outline rounded-full"></span>Loading...</span>
+                        </div>
+                        <div class="py-sm flex justify-between items-center">
+                            <span>Python Environment Version</span>
+                            <span class="font-bold font-data-mono text-primary" id="diagnostic-python">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 left-0 w-full px-xl py-base flex justify-between items-center bg-surface-container-low border-t border-outline-variant z-50">
+        <div class="flex items-center gap-md">
+            <span class="text-label-caps font-label-caps text-on-surface" id="footer-status-tag">System Health: Operational</span>
+            <div class="w-2 h-2 rounded-full bg-emerald-500" id="footer-status-dot"></div>
+        </div>
+        <div class="flex gap-lg">
+            <span class="text-data-mono font-data-mono text-on-surface-variant">Host: Localhost</span>
+            <span class="text-data-mono font-data-mono text-on-surface-variant">v3.0.0</span>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

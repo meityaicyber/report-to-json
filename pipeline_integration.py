@@ -29,6 +29,7 @@ from pathlib import Path
 
 # Make the scanner importable regardless of where this file is copied to
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / ".engine"))
 
 from yara_scanner import compile_rules, scan_file, DEFAULT_RULES_DIR  # noqa: E402
 

@@ -67,6 +67,7 @@ from typing import Optional, Union
 
 # Make sibling modules importable regardless of cwd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / ".engine"))
 
 from pdf_content_classifier import classify_pdf_content  # noqa: E402
 from sanitizer import ghostscript_sanitize  # noqa: E402
