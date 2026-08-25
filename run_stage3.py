@@ -18,16 +18,31 @@ def run_stage3():
     schema_path = Path("schemas/base.schema.json")
     schema_text = schema_path.read_text() if schema_path.exists() else ""
 
-    print(f"\n[Stage 3] Loading Dedicated Text LLM (Qwen/Qwen2.5-7B-Instruct)...")
-    from transformers import BitsAndBytesConfig
-    model_id = "Qwen/Qwen2.5-7B-Instruct"
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    quant_config = BitsAndBytesConfig(load_in_8bit=True)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        device_map="auto",
-        quantization_config=quant_config
-    )
+    print(f"\n[Stage 3] Loading Structuring Model (Qwen/Qwen3.6-VL)...")
+    from transformers import BitsAndBytesConfig, AutoModelForVision2Seq
+    model_id = os.environ.get("VLM_MODEL", "Qwen/Qwen3.6-VL")
+    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    quant_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16,
+        bnb_4bit_use_double_quant=True
+    ) if torch.cuda.is_available() else None
+    
+    try:
+        model = AutoModelForVision2Seq.from_pretrained(
+            model_id,
+            device_map="auto" if torch.cuda.is_available() else "cpu",
+            quantization_config=quant_config,
+            trust_remote_code=True
+        )
+    except Exception:
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            device_map="auto" if torch.cuda.is_available() else "cpu",
+            quantization_config=quant_config,
+            trust_remote_code=True
+        )
     
     prompt = f"""You are a strict data structuring assistant. I will provide you with a full Markdown document that may contain JSON blocks representing tables.
 Your task is to extract ALL of the information from this document into a single, cohesive JSON object according to the provided schema.

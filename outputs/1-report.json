@@ -1,0 +1,249 @@
+{
+  "report_meta": {
+    "report_id": "NA",
+    "report_title": "API Assessment Report",
+    "report_type": "API Assessment",
+    "report_release_date": "16th February 2026",
+    "report_version": "1.1",
+    "audit_type": "Initial Audit Report",
+    "audit_period": {
+      "from": "29.07.2025 to 15.02.2026",
+      "to": ""
+    },
+    "classification": "Confidential"
+  },
+  "document_control": {
+    "document_title": "API Assessment Report",
+    "document_id": "NA",
+    "document_version": "1.1",
+    "prepared_by": "Dev Rana",
+    "reviewed_by": "Anubhav",
+    "approved_by": "Ummed",
+    "released_by": "Dev",
+    "release_date": "16th February 2026",
+    "change_history": [],
+    "distribution_list": []
+  },
+  "introduction": {
+    "project_background": "Conduct comprehensive API assessment to identify and assess vulnerabilities in APIs.",
+    "objective": "API Security Assessment and Vulnerability Mitigation.",
+    "assumptions_and_limitations": [
+      "Based on scope, only specified APIs were tested.",
+      "Testing performed on production or staging environments as agreed."
+    ]
+  },
+  "engagement_scope": {
+    "assets": [
+      {
+        "sr_no": 1,
+        "asset_description": "ICCW",
+        "url": "https://varvta- helmino.fc.in/rest/upi/v2/p2p/pay?fcAppType=andr oid&fcChannel=3&",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 2,
+        "asset_description": "ICCW",
+        "url": "https://varvta- helmino.fc.in/rest/upi/v3/mandates/create?fcAppT ype=ios&fcChannel=5&",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      }
+    ],
+    "scope_updated_till": "",
+    "exclusions": [],
+    "testing_credentials": []
+  },
+  "auditing_team": [
+    {
+      "sr_no": 1,
+      "name": "",
+      "designation": "",
+      "email": "amrinder@PTDA.com",
+      "certifications": "Principal Security Engineer",
+      "cert_in_listed": "No"
+    },
+    {
+      "sr_no": 2,
+      "name": "Ummed",
+      "designation": "Director",
+      "email": "Ummed.Meel@ptda.com",
+      "certifications": "CISA, CEH, CHFI, CSRT, DCL",
+      "cert_in_listed": "Yes"
+    },
+    {
+      "sr_no": 3,
+      "name": "Anubhav",
+      "designation": "Manager",
+      "email": "Anubhav@ptda.com",
+      "certifications": "CEH, eJPT",
+      "cert_in_listed": "Yes"
+    },
+    {
+      "sr_no": 4,
+      "name": "Dev Rana",
+      "designation": "Senior Associate",
+      "email": "Devvrath@ptda.com",
+      "certifications": "-",
+      "cert_in_listed": "No"
+    }
+  ],
+  "audit_timeline": {
+    "assessment_start_date": "",
+    "assessment_end_date": "",
+    "activities": []
+  },
+  "methodology": {
+    "standards_referred": [
+      "OWASP API Security Top 10",
+      "CERT-In Guidelines",
+      "NIST SP 800-115"
+    ],
+    "approach_phases": [
+      {
+        "phase": "Reconnaissance & Scope Definition",
+        "description": "Asset identification and endpoint discovery."
+      },
+      {
+        "phase": "Vulnerability Assessment",
+        "description": "Automated and manual testing of API logic."
+      },
+      {
+        "phase": "Reporting & Remediation",
+        "description": "Documenting observations and remediation guidance."
+      }
+    ]
+  },
+  "tools_used": [
+    {
+      "sr_no": 1,
+      "tool_name": "Postman",
+      "version": "11.80.1",
+      "license_type": "Licensed"
+    },
+    {
+      "sr_no": 2,
+      "tool_name": "Burp Suite Pro",
+      "version": "2026.1",
+      "license_type": "Licensed"
+    }
+  ],
+  "executive_summary": {
+    "total_findings": 2,
+    "severity_count": {
+      "critical": 0,
+      "high": 2,
+      "medium": 0,
+      "low": 0
+    },
+    "summary_table": [
+      {
+        "sr_no": 1,
+        "finding_id": "OBS-01",
+        "affected_asset": "P2P - https://variin/rest/upi/v2/p2p/p ay?fcAppType=android&fcChan nel=3&fcversion=543 Create & Mandate - https://varvta- qain/rest/upi/v3/mand ates/create?fcAppType=ios&fcC hannel=5&fcversion=134139",
+        "title": "P2P - https://variin/rest/upi/v2/p2p/p ay?fcAppType=android&fcChan nel=3&fcversion=543 Create & Mandate - https://varvta- qain/rest/upi/v3/mand ates/create?fcAppType=ios&fcC hannel=5&fcversion=134139",
+        "cwe": "CWE-284: Improper Access Control CWE-693: Protection Mechanism Failure",
+        "severity": "High",
+        "status": "Closed",
+        "new_or_repeat": "Repeat"
+      },
+      {
+        "sr_no": 2,
+        "finding_id": "OBS-02",
+        "affected_asset": "P2P - https://fc/rest/upi/v2/p2p/p ay?fcAppType=android&fcChan nel=3&fcversion=543",
+        "title": "P2P - https://fc/rest/upi/v2/p2p/p ay?fcAppType=android&fcChan nel=3&fcversion=543",
+        "cwe": "CWE-840: Business Logic Errors",
+        "severity": "High",
+        "status": "Closed",
+        "new_or_repeat": "Repeat"
+      }
+    ]
+  },
+  "detailed_observations": [
+    {
+      "finding_id": "OBS-01",
+      "title": "Broken Authentication",
+      "status": "Closed",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control \u2022  CWE-693"
+      ],
+      "affected_asset": [
+        "https://varvta-helmino.vari.in/rest/upi/v2/p2p/pay?fcAppType=android&fcChannel=3&fcversion=543",
+        "https://varvta-helmino.vari.in/rest/upi/v3/mandates/create?fcAppType=ios&fcChannel=5&fcversion=134139"
+      ],
+      "observation_description": "It was observed that APIs accept requests with an empty encryptedBase64String, indicating that encryption validation on sensitive fields is not \nenforced.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_11_FIG_1]",
+        "[IMAGE_PAGE_12_FIG_1]",
+        "[IMAGE_PAGE_13_FIG_1]",
+        "[IMAGE_PAGE_14_FIG_1]"
+      ],
+      "impact": "An attacker can exploit this weakness to bypass mandatory encryption requirements and transmit sensitive information such as financial \nmandates, transaction details, and payment data without protection. This not only exposes the application to potential data interception and \ntampering but also significantly increases the risk of fraudulent transactions, account compromise, and regulatory non-compliance (e.g., PCI \nDSS, RBI guidelines).",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "It is recommended to enforce server-side encryption validation on sensitive fields like encryptBase64String, reject empty or invalid values, and \nallow only strong algorithms such as AES-256 and RSA across all financial APIs.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-02",
+      "title": "Business logic failure",
+      "status": "Closed",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-840: Business Logic Errors"
+      ],
+      "affected_asset": [
+        "https://varvta-helmino.vari.in/rest/upi/v3/mandates/create?fcAppType=ios&fcChannel=5&fcversion=134139"
+      ],
+      "observation_description": "It was observed that the API endpoint accepts negative transaction amounts (e.g., -5000) and still returns a 200 OK response with a success \nmessage, indicating lack of input validation.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_16_FIG_1]",
+        "[IMAGE_PAGE_17_FIG_1]"
+      ],
+      "impact": "An attacker can exploit this flaw to manipulate transaction logic, potentially leading to financial inconsistencies, bypassing business rules, or \ntriggering unintended backend behavior.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "It is recommended to implement strict server-side validation to reject negative or invalid transaction amounts, and ensure appropriate error \ncodes (e.g., 400 Bad Request) are returned for malformed inputs.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    }
+  ],
+  "appendices": {
+    "risk_rating_criteria": [
+      {
+        "rating": "Critical",
+        "description": "Vulnerabilities that cause immediate, catastrophic system or business compromise."
+      },
+      {
+        "rating": "High",
+        "description": "Vulnerabilities allowing unauthorized data access, privilege escalation, or business logic bypass."
+      },
+      {
+        "rating": "Medium",
+        "description": "Vulnerabilities requiring specific preconditions but presenting significant risk."
+      },
+      {
+        "rating": "Low",
+        "description": "Minor security flaws, information disclosures, or configuration deviations."
+      }
+    ],
+    "controlled_vocabulary_reference": "CVSS v3.1 / CWE / OWASP API Security",
+    "remediation_roadmap": [],
+    "retest_closure": []
+  },
+  "_meta": {
+    "pipeline_version": "3.0.0-decoupled",
+    "source_file": "1-report.pdf",
+    "structuring_backend": "rule_based",
+    "structuring_model": "Qwen/Qwen3.8-27B"
+  }
+}

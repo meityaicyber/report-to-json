@@ -1,0 +1,125 @@
+{
+  "report_meta": {
+    "report_id": "string",
+    "report_title": "string",
+    "report_type": "API Assessment | Web Application VAPT",
+    "report_release_date": "YYYY-MM-DD",
+    "report_version": "string",
+    "audit_type": "Initial Audit Report | Follow Up Report",
+    "audit_period": { "from": "YYYY-MM-DD", "to": "YYYY-MM-DD" },
+    "classification": "string"
+  },
+  "document_control": {
+    "document_title": "string",
+    "document_id": "string",
+    "document_version": "string",
+    "prepared_by": "string",
+    "reviewed_by": "string",
+    "approved_by": "string",
+    "released_by": "string",
+    "release_date": "YYYY-MM-DD",
+    "change_history": [
+      { "version": "string", "date": "YYYY-MM-DD", "remarks": "string" }
+    ],
+    "distribution_list": [
+      { "name": "string", "organization": "string", "designation": "string", "email": "string" }
+    ]
+  },
+  "introduction": {
+    "project_background": "string",
+    "objective": "string",
+    "assumptions_and_limitations": ["string"]
+  },
+  "engagement_scope": {
+    "assets": [
+      {
+        "sr_no": "number",
+        "asset_description": "string",
+        "url": "string",
+        "criticality": "string",
+        "internal_ip": "string",
+        "public_ip": "string",
+        "in_scope_functions": "string"
+      }
+    ],
+    "scope_updated_till": "YYYY-MM-DD",
+    "exclusions": ["string"],
+    "testing_credentials": [
+      { "role": "string", "username": "string", "auth_type": "string", "purpose": "string" }
+    ]
+  },
+  "auditing_team": [
+    {
+      "sr_no": "number",
+      "name": "string",
+      "designation": "string",
+      "email": "string",
+      "certifications": "string",
+      "cert_in_listed": "Yes | No | NA"
+    }
+  ],
+  "audit_timeline": {
+    "assessment_start_date": "YYYY-MM-DD",
+    "assessment_end_date": "YYYY-MM-DD",
+    "activities": [
+      { "date": "string", "activity": "string", "outcome": "string" }
+    ]
+  },
+  "methodology": {
+    "standards_referred": ["string"],
+    "approach_phases": [
+      { "phase": "string", "description": "string" }
+    ]
+  },
+  "tools_used": [
+    { "sr_no": "number", "tool_name": "string", "version": "string", "license_type": "Open Source | Licensed" }
+  ],
+  "executive_summary": {
+    "total_findings": "number",
+    "severity_count": { "critical": "number", "high": "number", "medium": "number", "low": "number" },
+    "summary_table": [
+      {
+        "sr_no": "number",
+        "finding_id": "string",
+        "affected_asset": "string",
+        "title": "string",
+        "cwe": "string",
+        "severity": "Critical | High | Medium | Low",
+        "status": "Open | Closed",
+        "new_or_repeat": "New | Repeat"
+      }
+    ]
+  },
+  "detailed_observations": [
+    {
+      "finding_id": "string",
+      "title": "string",
+      "status": "Open | Closed",
+      "severity": "Critical | High | Medium | Low",
+      "cvss_score": "number",
+      "cvss_vector": "string",
+      "cwe": ["string"],
+      "affected_asset": ["string"],
+      "observation_description": "string",
+      "preconditions": "string",
+      "proof_of_concept_steps": ["string"],
+      "impact": "string",
+      "likely_root_cause": "string",
+      "recommendation": "string",
+      "reference": "string",
+      "new_or_repeat": "New | Repeat"
+    }
+  ],
+  "appendices": {
+    "risk_rating_criteria": [
+      { "rating": "string", "description": "string" }
+    ],
+    "controlled_vocabulary_reference": "string",
+    "remediation_roadmap": [
+      { "window": "string", "findings": ["string"], "action": "string" }
+    ],
+    "retest_closure": [
+      { "finding_id": "string", "retest_date": "YYYY-MM-DD", "closure_evidence": "string", "status": "Open | Closed | Partially Remediated" }
+    ]
+  }
+}

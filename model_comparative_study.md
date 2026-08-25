@@ -16,10 +16,10 @@ The repository reveals a clear evolutionary path from text-only Large Language M
 * **Architecture:** Text-only LLM run locally via Ollama.
 * **Workflow:** Serves as the fallback text processing path if the vision pipeline is disabled (`--no-vision`).
 
-### 1.3 Qwen-2.5-VL 7B Instruct (`Qwen/Qwen2.5-VL-7B-Instruct`)
-* **Role:** The **current primary model** driving the "Vision-First" pipeline architecture.
-* **Architecture:** Vision-Language Model (VLM) run locally in 8-bit precision via HuggingFace/vLLM.
-* **Workflow:** Processes rendered images of document pages directly, parsing tables, reading structural hierarchies, and understanding layout without relying on an intermediate plain-text conversion step.
+### 1.3 Qwen 3.6 VL (`Qwen/Qwen3.6-VL`)
+* **Role:** The **primary Vision-Language Model** driving the multimodal pipeline architecture.
+* **Architecture:** Vision-Language Model (VLM) run in 4-bit NF4 precision (~4.8GB VRAM) or 8-bit precision via HuggingFace Transformers / vLLM / Ollama.
+* **Workflow:** Processes rendered images of document pages directly, parsing tables, reading structural hierarchies, reading diagram placeholders, and understanding layout natively.
 
 ---
 

@@ -1,6 +1,6 @@
 # Document Standardization Pipeline
 
-End-to-end document processing pipeline for converting DOCX/PDF reports into structured JSON using a local Vision-Language Model (Qwen2.5-VL-7B-Instruct).
+End-to-end document processing pipeline for converting DOCX/PDF reports into structured JSON using a Vision-Language Model (**Qwen 3.6 VL** / `Qwen/Qwen3.6-VL`).
 
 ## Quick Start
 
@@ -23,8 +23,8 @@ cp .env.example .env
 
 ### 2. GPU Requirements
 
-- **Minimum:** NVIDIA GPU with 16GB VRAM (RTX 2000 Ada, RTX 4060 Ti 16GB, etc.)
-- **Model:** Qwen2.5-VL-7B-Instruct loaded in 8-bit precision (~9-10GB VRAM)
+- **Minimum:** NVIDIA GPU with 8GB VRAM (RTX 4060 Laptop, RTX 3060, etc.)
+- **Model:** `Qwen/Qwen3.6-VL` loaded in 4-bit NF4 precision (~4.8GB VRAM) or 8-bit precision (~9-10GB VRAM)
 - **CUDA:** 12.0+ recommended
 
 ### 3. Test the Pipeline

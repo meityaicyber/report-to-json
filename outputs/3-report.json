@@ -1,0 +1,869 @@
+{
+  "report_meta": {
+    "report_id": "NA",
+    "report_title": "API Assessment / VAPT Report",
+    "report_type": "API Assessment",
+    "report_release_date": "",
+    "report_version": "1.0",
+    "audit_type": "Initial Audit Report",
+    "audit_period": {
+      "from": "",
+      "to": ""
+    },
+    "classification": "Confidential"
+  },
+  "document_control": {
+    "document_title": "API Assessment Report",
+    "document_id": "NA",
+    "document_version": "1.0",
+    "prepared_by": "",
+    "reviewed_by": "",
+    "approved_by": "",
+    "released_by": "",
+    "release_date": "",
+    "change_history": [],
+    "distribution_list": []
+  },
+  "introduction": {
+    "project_background": "Conduct comprehensive API assessment to identify and assess vulnerabilities in APIs.",
+    "objective": "API Security Assessment and Vulnerability Mitigation.",
+    "assumptions_and_limitations": [
+      "Based on scope, only specified APIs were tested.",
+      "Testing performed on production or staging environments as agreed."
+    ]
+  },
+  "engagement_scope": {
+    "assets": [
+      {
+        "sr_no": 1,
+        "asset_description": "API Endpoint",
+        "url": "https://merchant-stage.nexora-retail.example",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 2,
+        "asset_description": "API Endpoint",
+        "url": "https://api-stage.nexora-retail.example",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 3,
+        "asset_description": "API Endpoint",
+        "url": "https://assets-stage.nexora-retail.example",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 4,
+        "asset_description": "API Endpoint",
+        "url": "https://auth-stage.nexora-retail.example",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 5,
+        "asset_description": "API Endpoint",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 6,
+        "asset_description": "API Endpoint",
+        "url": "https://owasp.org/www-project-web-security-testing-guide/",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 7,
+        "asset_description": "API Endpoint",
+        "url": "https://github.com/OWASP/ASVS",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      },
+      {
+        "sr_no": 8,
+        "asset_description": "API Endpoint",
+        "url": "https://www.first.org/cvss/v3.1/specification-document",
+        "criticality": "High",
+        "internal_ip": "NA",
+        "public_ip": "NA",
+        "in_scope_functions": "Full API Methods"
+      }
+    ],
+    "scope_updated_till": "",
+    "exclusions": [],
+    "testing_credentials": []
+  },
+  "auditing_team": [
+    {
+      "sr_no": 1,
+      "name": "Merchant Admin",
+      "designation": "MFA enabled",
+      "email": "qa.merchant.admin@nexora.local",
+      "certifications": "Orders, refunds, document upload, profile management",
+      "cert_in_listed": "No"
+    },
+    {
+      "sr_no": 2,
+      "name": "Merchant Operator",
+      "designation": "MFA enabled",
+      "email": "qa.merchant.operator@nexora.local",
+      "certifications": "Orders, invoices and support tickets",
+      "cert_in_listed": "No"
+    },
+    {
+      "sr_no": 3,
+      "name": "Vendor Viewer",
+      "designation": "MFA enabled",
+      "email": "qa.vendor.viewer@nexora.local",
+      "certifications": "Read-only merchant records for tenant NTX-MER-021",
+      "cert_in_listed": "No"
+    },
+    {
+      "sr_no": 4,
+      "name": "Support Agent",
+      "designation": "MFA enabled",
+      "email": "qa.support.agent@nexora.local",
+      "certifications": "Back-office support ticket review",
+      "cert_in_listed": "No"
+    },
+    {
+      "sr_no": 5,
+      "name": "Auditor",
+      "designation": "Security Auditor",
+      "email": "Initiate password reset for qa.vendor.operator@nexora.local.",
+      "certifications": "Certified",
+      "cert_in_listed": "No"
+    }
+  ],
+  "audit_timeline": {
+    "assessment_start_date": "",
+    "assessment_end_date": "",
+    "activities": []
+  },
+  "methodology": {
+    "standards_referred": [
+      "OWASP API Security Top 10",
+      "CERT-In Guidelines",
+      "NIST SP 800-115"
+    ],
+    "approach_phases": [
+      {
+        "phase": "Reconnaissance & Scope Definition",
+        "description": "Asset identification and endpoint discovery."
+      },
+      {
+        "phase": "Vulnerability Assessment",
+        "description": "Automated and manual testing of API logic."
+      },
+      {
+        "phase": "Reporting & Remediation",
+        "description": "Documenting observations and remediation guidance."
+      }
+    ]
+  },
+  "tools_used": [
+    {
+      "sr_no": 1,
+      "tool_name": "Proxying, manual request replay, Intruder rate-limit validation and evidence capture",
+      "version": "Latest",
+      "license_type": "Open Source"
+    },
+    {
+      "sr_no": 2,
+      "tool_name": "Supplementary passive scanning and header review",
+      "version": "Latest",
+      "license_type": "Open Source"
+    },
+    {
+      "sr_no": 3,
+      "tool_name": "API request reproduction and authorization matrix checks",
+      "version": "Latest",
+      "license_type": "Open Source"
+    }
+  ],
+  "executive_summary": {
+    "total_findings": 10,
+    "severity_count": {
+      "critical": 0,
+      "high": 10,
+      "medium": 0,
+      "low": 0
+    },
+    "summary_table": [
+      {
+        "sr_no": 1,
+        "finding_id": "OBS-01",
+        "affected_asset": "API Target",
+        "title": "Broken Object Level Authorization in Invoice Retrieval",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 2,
+        "finding_id": "OBS-02",
+        "affected_asset": "API Target",
+        "title": "Time-Based SQL Injection in Orders Search API",
+        "cwe": "CWE-284",
+        "severity": "Critical",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 3,
+        "finding_id": "OBS-03",
+        "affected_asset": "API Target",
+        "title": "Password Reset OTP Endpoint Missing Rate Limiting",
+        "cwe": "CWE-284",
+        "severity": "Critical",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 4,
+        "finding_id": "OBS-04",
+        "affected_asset": "API Target",
+        "title": "Stored Cross-Site Scripting in Support Ticket Comments",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 5,
+        "finding_id": "OBS-05",
+        "affected_asset": "API Target",
+        "title": "JWT Issuer/Audience Validation Gap Enables Role Confusion",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 6,
+        "finding_id": "OBS-06",
+        "affected_asset": "API Target",
+        "title": "CORS Origin Reflection with Credentialed API Access",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 7,
+        "finding_id": "OBS-07",
+        "affected_asset": "API Target",
+        "title": "Unauthenticated Debug Configuration Endpoint Exposure",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 8,
+        "finding_id": "OBS-08",
+        "affected_asset": "API Target",
+        "title": "Active Content Upload Served from Trusted Asset Domain",
+        "cwe": "CWE-284",
+        "severity": "Medium",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 9,
+        "finding_id": "OBS-09",
+        "affected_asset": "API Target",
+        "title": "High",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 10,
+        "finding_id": "OBS-10",
+        "affected_asset": "API Target",
+        "title": "Critical",
+        "cwe": "CWE-284",
+        "severity": "Critical",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 11,
+        "finding_id": "OBS-11",
+        "affected_asset": "API Target",
+        "title": "Critical",
+        "cwe": "CWE-284",
+        "severity": "Critical",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 12,
+        "finding_id": "OBS-12",
+        "affected_asset": "API Target",
+        "title": "High",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 13,
+        "finding_id": "OBS-13",
+        "affected_asset": "API Target",
+        "title": "High",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 14,
+        "finding_id": "OBS-14",
+        "affected_asset": "API Target",
+        "title": "High",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 15,
+        "finding_id": "OBS-15",
+        "affected_asset": "API Target",
+        "title": "High",
+        "cwe": "CWE-284",
+        "severity": "High",
+        "status": "Open",
+        "new_or_repeat": "New"
+      },
+      {
+        "sr_no": 16,
+        "finding_id": "OBS-16",
+        "affected_asset": "API Target",
+        "title": "Medium",
+        "cwe": "CWE-284",
+        "severity": "Medium",
+        "status": "Open",
+        "new_or_repeat": "New"
+      }
+    ]
+  },
+  "detailed_observations": [
+    {
+      "finding_id": "OBS-01",
+      "title": "Engagement Scope, Testing Credentials and Deviations",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "https://merchant-stage.nexora-retail.example",
+        "https://api-stage.nexora-retail.example",
+        "https://assets-stage.nexora-retail.example",
+        "https://auth-stage.nexora-retail.example"
+      ],
+      "observation_description": "Engagement Scope\nAsset\nURL / Identifier\nIn-Scope Functions\nWeb Portal\nhttps://merchant-stage.nexora-retail.example\nMerchant dashboard, order search, invoices, \nrefunds, support ticketing, document upload\nAPI Gateway\nhttps://api-stage.nexora-retail.example\nREST APIs used by portal, mobile browser flows \nand support console\nAsset Delivery\nhttps://assets-stage.nexora-retail.example\nUploaded merchant",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_7_FIG_1]",
+        "[IMAGE_PAGE_7_FIG_2]",
+        "[IMAGE_PAGE_7_FIG_3]",
+        "[IMAGE_PAGE_7_FIG_4]",
+        "[IMAGE_PAGE_7_FIG_5]",
+        "[IMAGE_PAGE_7_FIG_6]",
+        "[IMAGE_PAGE_7_FIG_7]",
+        "[IMAGE_PAGE_7_FIG_8]",
+        "[IMAGE_PAGE_7_FIG_9]",
+        "[IMAGE_PAGE_7_FIG_10]",
+        "[IMAGE_PAGE_7_FIG_11]"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-02",
+      "title": "Planning",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "Scope validation, rules of engagement, credential onboarding, stakeholder \ncontacts and evidence handling process.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against API Endpoint"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-03",
+      "title": "Discovery",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "Crawl portal, proxy traffic, enumerate API routes, identify role-specific \nworkflows and capture baseline behavior.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against API Endpoint"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-04",
+      "title": "Vulnerability Identification",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "Manual testing supported by targeted scanners, payload variation, \nauthorization matrix testing and workflow abuse testing.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against API Endpoint"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-05",
+      "title": "Exploit Validation",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "Controlled PoC execution using test data only, with response evidence, \nscreenshots and business impact analysis.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against API Endpoint"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-06",
+      "title": "Risk Rating",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "CVSS v3.1 base score combined with business impact, data sensitivity and \nexploit preconditions.",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against API Endpoint"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-07",
+      "title": "Reporting",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "Root cause, remediation guidance, retest criteria, target owners and \nprioritization.\nType of Assessment and Testing Environment\nAssessment Type\nGrey-box web application VAPT with authenticated role-based \ntesting and limited unauthenticated testing.\nTesting Environment\nStaging environment, production-equivalent application build, \nproduction-equivalent infrastructure policies and synthetic test",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_9_FIG_1]",
+        "[IMAGE_PAGE_9_FIG_2]",
+        "[IMAGE_PAGE_9_FIG_3]",
+        "[IMAGE_PAGE_9_FIG_4]",
+        "[IMAGE_PAGE_9_FIG_5]",
+        "[IMAGE_PAGE_9_FIG_6]",
+        "[IMAGE_PAGE_9_FIG_7]",
+        "[IMAGE_PAGE_9_FIG_8]",
+        "[IMAGE_PAGE_9_FIG_9]",
+        "[IMAGE_PAGE_9_FIG_10]",
+        "[IMAGE_PAGE_9_FIG_11]",
+        "[IMAGE_PAGE_10_FIG_1]",
+        "[IMAGE_PAGE_10_FIG_2]",
+        "[IMAGE_PAGE_10_FIG_3]",
+        "[IMAGE_PAGE_10_FIG_4]",
+        "[IMAGE_PAGE_10_FIG_5]",
+        "[IMAGE_PAGE_10_FIG_6]",
+        "[IMAGE_PAGE_10_FIG_7]",
+        "[IMAGE_PAGE_10_FIG_8]",
+        "[IMAGE_PAGE_10_FIG_9]",
+        "[IMAGE_PAGE_10_FIG_10]",
+        "[IMAGE_PAGE_10_FIG_11]"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-08",
+      "title": "Summary of Detailed Observations",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "API Endpoint"
+      ],
+      "observation_description": "ID\nObservation\nSeverity\nCVSS\nOWASP Mapping\nStatus\nF-01\nBroken Object Level \nAuthorization in Invoice \nRetrieval\nHigh\n8.1\nA01: Broken Access \nControl\nOpen\nF-02\nTime-Based SQL \nInjection in Orders \nSearch API\nCritical\n9.9\nA05: Injection\nOpen\nF-03\nPassword Reset OTP \nEndpoint Missing Rate \nLimiting\nCritical\n9.1\nA07: Authentication \nFailures\nOpen\nF-04\nStored Cross-Site \nScripting in Support \nTicket Co",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_11_FIG_1]",
+        "[IMAGE_PAGE_11_FIG_2]",
+        "[IMAGE_PAGE_11_FIG_3]",
+        "[IMAGE_PAGE_11_FIG_4]",
+        "[IMAGE_PAGE_11_FIG_5]",
+        "[IMAGE_PAGE_11_FIG_6]",
+        "[IMAGE_PAGE_11_FIG_7]",
+        "[IMAGE_PAGE_11_FIG_8]",
+        "[IMAGE_PAGE_11_FIG_9]",
+        "[IMAGE_PAGE_11_FIG_10]",
+        "[IMAGE_PAGE_11_FIG_11]"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-09",
+      "title": "Detailed Vulnerability Observations and Proofs of Concept",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "https://github.com/OWASP/ASVS",
+        "https://owasp.org/www-project-top-ten/",
+        "https://www.first.org/cvss/v3.1/specification-document",
+        "https://owasp.org/www-project-web-security-testing-guide/"
+      ],
+      "observation_description": "Evidence standard: Each proof of concept was executed against agreed in-scope staging assets using approved test accounts. \nRequest and response excerpts are sanitized but preserve the technical behavior necessary for remediation.\nF-01\nHigh\nCVSS 8.1\nOpen\nBroken Object Level Authorization in Invoice Retrieval\nAffected Component\nGET /api/v2/tenants/{tenantId}/invoices/{invoiceId}\nOWASP Mapping\nOWASP",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "[IMAGE_PAGE_12_FIG_1]",
+        "[IMAGE_PAGE_12_FIG_2]",
+        "[IMAGE_PAGE_12_FIG_3]",
+        "[IMAGE_PAGE_12_FIG_4]",
+        "[IMAGE_PAGE_12_FIG_5]",
+        "[IMAGE_PAGE_12_FIG_6]",
+        "[IMAGE_PAGE_12_FIG_7]",
+        "[IMAGE_PAGE_12_FIG_8]",
+        "[IMAGE_PAGE_12_FIG_9]",
+        "[IMAGE_PAGE_12_FIG_10]",
+        "[IMAGE_PAGE_12_FIG_11]",
+        "[IMAGE_PAGE_13_FIG_1]",
+        "[IMAGE_PAGE_13_FIG_2]",
+        "[IMAGE_PAGE_13_FIG_3]",
+        "[IMAGE_PAGE_13_FIG_4]",
+        "[IMAGE_PAGE_13_FIG_5]",
+        "[IMAGE_PAGE_13_FIG_6]",
+        "[IMAGE_PAGE_13_FIG_7]",
+        "[IMAGE_PAGE_13_FIG_8]",
+        "[IMAGE_PAGE_13_FIG_9]",
+        "[IMAGE_PAGE_13_FIG_10]",
+        "[IMAGE_PAGE_13_FIG_11]",
+        "[IMAGE_PAGE_14_FIG_1]",
+        "[IMAGE_PAGE_14_FIG_2]",
+        "[IMAGE_PAGE_14_FIG_3]",
+        "[IMAGE_PAGE_14_FIG_4]",
+        "[IMAGE_PAGE_14_FIG_5]",
+        "[IMAGE_PAGE_14_FIG_6]",
+        "[IMAGE_PAGE_14_FIG_7]",
+        "[IMAGE_PAGE_14_FIG_8]",
+        "[IMAGE_PAGE_14_FIG_9]",
+        "[IMAGE_PAGE_14_FIG_10]",
+        "[IMAGE_PAGE_14_FIG_11]",
+        "[IMAGE_PAGE_15_FIG_1]",
+        "[IMAGE_PAGE_15_FIG_2]",
+        "[IMAGE_PAGE_15_FIG_3]",
+        "[IMAGE_PAGE_15_FIG_4]",
+        "[IMAGE_PAGE_15_FIG_5]",
+        "[IMAGE_PAGE_15_FIG_6]",
+        "[IMAGE_PAGE_15_FIG_7]",
+        "[IMAGE_PAGE_15_FIG_8]",
+        "[IMAGE_PAGE_15_FIG_9]",
+        "[IMAGE_PAGE_15_FIG_10]",
+        "[IMAGE_PAGE_15_FIG_11]",
+        "[IMAGE_PAGE_16_FIG_1]",
+        "[IMAGE_PAGE_16_FIG_2]",
+        "[IMAGE_PAGE_16_FIG_3]",
+        "[IMAGE_PAGE_16_FIG_4]",
+        "[IMAGE_PAGE_16_FIG_5]",
+        "[IMAGE_PAGE_16_FIG_6]",
+        "[IMAGE_PAGE_16_FIG_7]",
+        "[IMAGE_PAGE_16_FIG_8]",
+        "[IMAGE_PAGE_16_FIG_9]",
+        "[IMAGE_PAGE_16_FIG_10]",
+        "[IMAGE_PAGE_16_FIG_11]",
+        "[IMAGE_PAGE_17_FIG_1]",
+        "[IMAGE_PAGE_17_FIG_2]",
+        "[IMAGE_PAGE_17_FIG_3]",
+        "[IMAGE_PAGE_17_FIG_4]",
+        "[IMAGE_PAGE_17_FIG_5]",
+        "[IMAGE_PAGE_17_FIG_6]",
+        "[IMAGE_PAGE_17_FIG_7]",
+        "[IMAGE_PAGE_17_FIG_8]",
+        "[IMAGE_PAGE_17_FIG_9]",
+        "[IMAGE_PAGE_17_FIG_10]",
+        "[IMAGE_PAGE_17_FIG_11]",
+        "[IMAGE_PAGE_18_FIG_1]",
+        "[IMAGE_PAGE_18_FIG_2]",
+        "[IMAGE_PAGE_18_FIG_3]",
+        "[IMAGE_PAGE_18_FIG_4]",
+        "[IMAGE_PAGE_18_FIG_5]",
+        "[IMAGE_PAGE_18_FIG_6]",
+        "[IMAGE_PAGE_18_FIG_7]",
+        "[IMAGE_PAGE_18_FIG_8]",
+        "[IMAGE_PAGE_18_FIG_9]",
+        "[IMAGE_PAGE_18_FIG_10]",
+        "[IMAGE_PAGE_18_FIG_11]",
+        "[IMAGE_PAGE_19_FIG_1]",
+        "[IMAGE_PAGE_19_FIG_2]",
+        "[IMAGE_PAGE_19_FIG_3]",
+        "[IMAGE_PAGE_19_FIG_4]",
+        "[IMAGE_PAGE_19_FIG_5]",
+        "[IMAGE_PAGE_19_FIG_6]",
+        "[IMAGE_PAGE_19_FIG_7]",
+        "[IMAGE_PAGE_19_FIG_8]",
+        "[IMAGE_PAGE_19_FIG_9]",
+        "[IMAGE_PAGE_19_FIG_10]",
+        "[IMAGE_PAGE_19_FIG_11]",
+        "[IMAGE_PAGE_20_FIG_1]",
+        "[IMAGE_PAGE_20_FIG_2]",
+        "[IMAGE_PAGE_20_FIG_3]",
+        "[IMAGE_PAGE_20_FIG_4]",
+        "[IMAGE_PAGE_20_FIG_5]",
+        "[IMAGE_PAGE_20_FIG_6]",
+        "[IMAGE_PAGE_20_FIG_7]",
+        "[IMAGE_PAGE_20_FIG_8]",
+        "[IMAGE_PAGE_20_FIG_9]",
+        "[IMAGE_PAGE_20_FIG_10]",
+        "[IMAGE_PAGE_20_FIG_11]",
+        "[IMAGE_PAGE_21_FIG_1]",
+        "[IMAGE_PAGE_21_FIG_2]",
+        "[IMAGE_PAGE_21_FIG_3]",
+        "[IMAGE_PAGE_21_FIG_4]",
+        "[IMAGE_PAGE_21_FIG_5]",
+        "[IMAGE_PAGE_21_FIG_6]",
+        "[IMAGE_PAGE_21_FIG_7]",
+        "[IMAGE_PAGE_21_FIG_8]",
+        "[IMAGE_PAGE_21_FIG_9]",
+        "[IMAGE_PAGE_21_FIG_10]",
+        "[IMAGE_PAGE_21_FIG_11]",
+        "[IMAGE_PAGE_22_FIG_1]",
+        "[IMAGE_PAGE_22_FIG_2]",
+        "[IMAGE_PAGE_22_FIG_3]",
+        "[IMAGE_PAGE_22_FIG_4]",
+        "[IMAGE_PAGE_22_FIG_5]",
+        "[IMAGE_PAGE_22_FIG_6]",
+        "[IMAGE_PAGE_22_FIG_7]",
+        "[IMAGE_PAGE_22_FIG_8]",
+        "[IMAGE_PAGE_22_FIG_9]",
+        "[IMAGE_PAGE_22_FIG_10]",
+        "[IMAGE_PAGE_22_FIG_11]",
+        "[IMAGE_PAGE_23_FIG_1]",
+        "[IMAGE_PAGE_23_FIG_2]",
+        "[IMAGE_PAGE_23_FIG_3]",
+        "[IMAGE_PAGE_23_FIG_4]",
+        "[IMAGE_PAGE_23_FIG_5]",
+        "[IMAGE_PAGE_23_FIG_6]",
+        "[IMAGE_PAGE_23_FIG_7]",
+        "[IMAGE_PAGE_23_FIG_8]",
+        "[IMAGE_PAGE_23_FIG_9]",
+        "[IMAGE_PAGE_23_FIG_10]",
+        "[IMAGE_PAGE_23_FIG_11]",
+        "[IMAGE_PAGE_24_FIG_1]",
+        "[IMAGE_PAGE_24_FIG_2]",
+        "[IMAGE_PAGE_24_FIG_3]",
+        "[IMAGE_PAGE_24_FIG_4]",
+        "[IMAGE_PAGE_24_FIG_5]",
+        "[IMAGE_PAGE_24_FIG_6]",
+        "[IMAGE_PAGE_24_FIG_7]",
+        "[IMAGE_PAGE_24_FIG_8]",
+        "[IMAGE_PAGE_24_FIG_9]",
+        "[IMAGE_PAGE_24_FIG_10]",
+        "[IMAGE_PAGE_24_FIG_11]",
+        "[IMAGE_PAGE_25_FIG_1]",
+        "[IMAGE_PAGE_25_FIG_2]",
+        "[IMAGE_PAGE_25_FIG_3]",
+        "[IMAGE_PAGE_25_FIG_4]",
+        "[IMAGE_PAGE_25_FIG_5]",
+        "[IMAGE_PAGE_25_FIG_6]",
+        "[IMAGE_PAGE_25_FIG_7]",
+        "[IMAGE_PAGE_25_FIG_8]",
+        "[IMAGE_PAGE_25_FIG_9]",
+        "[IMAGE_PAGE_25_FIG_10]",
+        "[IMAGE_PAGE_25_FIG_11]",
+        "[IMAGE_PAGE_26_FIG_1]",
+        "[IMAGE_PAGE_26_FIG_2]",
+        "[IMAGE_PAGE_26_FIG_3]",
+        "[IMAGE_PAGE_26_FIG_4]",
+        "[IMAGE_PAGE_26_FIG_5]",
+        "[IMAGE_PAGE_26_FIG_6]",
+        "[IMAGE_PAGE_26_FIG_7]",
+        "[IMAGE_PAGE_26_FIG_8]",
+        "[IMAGE_PAGE_26_FIG_9]",
+        "[IMAGE_PAGE_26_FIG_10]",
+        "[IMAGE_PAGE_26_FIG_11]",
+        "[IMAGE_PAGE_27_FIG_1]",
+        "[IMAGE_PAGE_27_FIG_2]",
+        "[IMAGE_PAGE_27_FIG_3]",
+        "[IMAGE_PAGE_27_FIG_4]",
+        "[IMAGE_PAGE_27_FIG_5]",
+        "[IMAGE_PAGE_27_FIG_6]",
+        "[IMAGE_PAGE_27_FIG_7]",
+        "[IMAGE_PAGE_27_FIG_8]",
+        "[IMAGE_PAGE_27_FIG_9]",
+        "[IMAGE_PAGE_27_FIG_10]",
+        "[IMAGE_PAGE_27_FIG_11]"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    },
+    {
+      "finding_id": "OBS-10",
+      "title": "Remediation Roadmap and References",
+      "status": "Open",
+      "severity": "High",
+      "cvss_score": null,
+      "cvss_vector": "",
+      "cwe": [
+        "CWE-284: Improper Access Control"
+      ],
+      "affected_asset": [
+        "https://github.com/OWASP/ASVS",
+        "https://owasp.org/www-project-top-ten/",
+        "https://www.first.org/cvss/v3.1/specification-document",
+        "https://owasp.org/www-project-web-security-testing-guide/"
+      ],
+      "observation_description": "Prioritized Remediation Roadmap\nTarget Window\nFindings\nActions\n0-7 days\nF-02, F-03\nPatch SQL injection path; enforce OTP \nlockout/rate limits; rotate any secrets exposed \nthrough debug endpoint.\n8-15 days\nF-01, F-04, F-05, F-06, F-07\nImplement server-side authorization checks, \noutput encoding/CSP, strict JWT validation, \nCORS allowlisting and remove debug endpoints.\n16-30 days\nF-08\nHarden upload",
+      "preconditions": "Attacker has network access to the API endpoint.",
+      "proof_of_concept_steps": [
+        "Executed payload against https://github.com/OWASP/ASVS"
+      ],
+      "impact": "Potential data compromise and business logic bypass.",
+      "likely_root_cause": "Missing server-side validation and access controls.",
+      "recommendation": "Enforce strict input validation, authorization checks, and server-side encryption.",
+      "reference": "https://owasp.org/www-project-api-security/",
+      "new_or_repeat": "New"
+    }
+  ],
+  "appendices": {
+    "risk_rating_criteria": [
+      {
+        "rating": "Critical",
+        "description": "Vulnerabilities that cause immediate, catastrophic system or business compromise."
+      },
+      {
+        "rating": "High",
+        "description": "Vulnerabilities allowing unauthorized data access, privilege escalation, or business logic bypass."
+      },
+      {
+        "rating": "Medium",
+        "description": "Vulnerabilities requiring specific preconditions but presenting significant risk."
+      },
+      {
+        "rating": "Low",
+        "description": "Minor security flaws, information disclosures, or configuration deviations."
+      }
+    ],
+    "controlled_vocabulary_reference": "CVSS v3.1 / CWE / OWASP API Security",
+    "remediation_roadmap": [],
+    "retest_closure": []
+  },
+  "_meta": {
+    "pipeline_version": "3.0.0-decoupled",
+    "source_file": "3-report.pdf",
+    "structuring_backend": "rule_based",
+    "structuring_model": "Qwen/Qwen3.8-27B"
+  }
+}
